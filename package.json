@@ -1,0 +1,42 @@
+{
+  "name": "discord-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon -w src -e ts -x npm run clean:build:start",
+    "start": "node dist/src/index.js",
+    "deploy:global": "node dist/src/deploy-global-commands.js",
+    "deploy:guild": "node dist/src/deploy-guild-commands.js",
+    "delete:global": "node dist/src/delete-global-commands.js",
+    "delete:guild": "node dist/src/delete-guild-commands.js",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
+    "format": "prettier --check .",
+    "format:fix": "prettier --write .",
+    "build": "tsc",
+    "clean": "rm -rf dist logs",
+    "clean:build:start": "npm run clean && npm run build && npm run start"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.11.20",
+    "@typescript-eslint/eslint-plugin": "^7.1.0",
+    "@typescript-eslint/parser": "^7.1.0",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "nodemon": "^3.1.0",
+    "prettier": "3.2.5",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "discord.js": "^14.14.1",
+    "openai": "^4.28.0",
+    "winston": "^3.11.0",
+    "winston-daily-rotate-file": "^5.0.0"
+  }
+}

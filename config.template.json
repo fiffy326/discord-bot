@@ -1,0 +1,31 @@
+{
+  "bot": {
+    "status": "online"
+  },
+  "relay": {
+    "inputGuildId": "",
+    "outputWebhookURL": ""
+  },
+  "logs": {
+    "console": {
+      "level": "info",
+      "timestampFormat": "YYYY-MM-DD hh:mm:ss A"
+    },
+    "file": {
+      "level": "error",
+      "datePattern": "YYYY-MM-DD-HH",
+      "maxFiles": "14d",
+      "maxSize": "10m"
+    }
+  },
+  "apis": {
+    "discord": {
+      "token": "",
+      "clientId": "",
+      "guildId": ""
+    },
+    "openai": {
+      "secretKey": ""
+    }
+  }
+}
