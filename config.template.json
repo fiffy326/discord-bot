@@ -2,10 +2,16 @@
   "bot": {
     "status": "online"
   },
-  "relay": {
-    "inputGuildId": "",
-    "outputWebhookURL": ""
-  },
+  "relays": [
+    {
+      "webhookURL": [
+      ],
+      "guildIds": [
+      ],
+      "channelIds": [
+      ]
+    }
+  ],
   "logs": {
     "console": {
       "level": "info",
