@@ -4,12 +4,9 @@
   },
   "relays": [
     {
-      "webhookURL": [
-      ],
-      "guildIds": [
-      ],
-      "channelIds": [
-      ]
+      "webhookURL": [],
+      "guildIds": [],
+      "channelIds": []
     }
   ],
   "logs": {

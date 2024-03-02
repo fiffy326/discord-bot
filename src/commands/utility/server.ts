@@ -1,6 +1,7 @@
 import { SlashCommandBuilder } from "discord.js";
+import Command from "../../base/interfaces/command.js";
 
-export default {
+const command: Command = {
   data: new SlashCommandBuilder()
     .setName("server")
     .setDescription("Provides information about the server")
@@ -14,3 +15,5 @@ export default {
     await interaction.reply({ content: response, ephemeral: ephemeral });
   },
 };
+
+export default command;

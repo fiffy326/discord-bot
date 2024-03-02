@@ -1,8 +1,9 @@
-import { openaiImage, openaiText } from "../../utils/openai.js";
 import truncate from "../../utils/truncate.js";
+import Command from "../../base/interfaces/command.js";
+import { openaiImage, openaiText } from "../../utils/openai.js";
 import { SlashCommandBuilder } from "discord.js";
 
-export default {
+const command: Command = {
   data: new SlashCommandBuilder()
     .setName("ai")
     .setDescription("Generates a response using AI")
@@ -55,3 +56,5 @@ export default {
     await interaction.editReply(response);
   },
 };
+
+export default command;

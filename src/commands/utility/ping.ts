@@ -1,6 +1,7 @@
 import { SlashCommandBuilder } from "discord.js";
+import Command from "../../base/interfaces/command.js";
 
-export default {
+const command: Command = {
   data: new SlashCommandBuilder()
     .setName("ping")
     .setDescription("Check the bot's latency")
@@ -21,3 +22,5 @@ export default {
     interaction.editReply(response);
   },
 };
+
+export default command;
