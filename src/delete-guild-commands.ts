@@ -1,14 +1,14 @@
-import config from "../config.json" with { type: "json" };
+import config from "./utils/config.js";
 import log from "./utils/log.js";
 import { REST, Routes } from "discord.js";
 
 /* Delete guild commands */
-const rest = new REST().setToken(config.apis.discord.token);
+const rest = new REST().setToken(config.api.discord.token);
 rest
   .put(
     Routes.applicationGuildCommands(
-      config.apis.discord.clientId,
-      config.apis.discord.guildId
+      config.api.discord.clientId,
+      config.api.discord.guildId
     ),
     { body: [] }
   )

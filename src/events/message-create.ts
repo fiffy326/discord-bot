@@ -1,5 +1,6 @@
-import config from "../../config.json" with { type: "json" };
-import Relay from "../base/interfaces/relay.js";
+import config from "../utils/config.js";
+import Event from "../interfaces/event.js";
+import Relay from "../interfaces/relay.js";
 import {
   cleanContent,
   Events,
@@ -11,16 +12,16 @@ import {
 const zeroWidthSpace = "​";
 const relays: Array<Relay> = config.relays;
 
-export default {
+export const event: Event = {
   name: Events.MessageCreate,
   once: false,
   async execute(message: Message) {
     if (message.author.bot || message.webhookId) return;
     relays.forEach((relay: Relay) => {
       if (
-        relay.guildIds.includes(message.guildId!.toString()) ||
-        relay.channelIds.includes(message.channelId.toString()) ||
-        relay.userIds.includes(message.author.id.toString())
+        relay.guildIds.includes(message.guildId!) ||
+        relay.channelIds.includes(message.channelId) ||
+        relay.userIds.includes(message.author.id)
       ) {
         const webhookClient = new WebhookClient({ url: relay.webhookURL });
         const channel = <TextChannel>message.channel;
@@ -40,3 +41,5 @@ export default {
     });
   },
 };
+
+export default event;

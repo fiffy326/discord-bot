@@ -1,4 +1,4 @@
-import config from "../config.json" with { type: "json" };
+import config from "./utils/config.js";
 import log from "./utils/log.js";
 import { dirname, join } from "path";
 import { fileURLToPath } from "url";
@@ -28,14 +28,13 @@ for (const dir of cmdDirs) {
 }
 
 /* Deploy global commands */
-const rest = new REST().setToken(config.apis.discord.token);
+const rest = new REST().setToken(config.api.discord.token);
 (async () => {
   try {
     log.info(`Started deploying ${cmds.length} global commands.`);
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const data: any = await rest.put(
-      Routes.applicationCommands(config.apis.discord.clientId),
+      Routes.applicationCommands(config.api.discord.clientId),
       { body: cmds }
     );
 

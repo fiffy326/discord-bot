@@ -1,5 +1,5 @@
-import config from "../config.json" with { type: "json" };
-import Client from "./base/classes/client.js";
+import Client from "./classes/client.js";
+import config from "./utils/config.js";
 import log from "./utils/log.js";
 import { dirname, join } from "path";
 import { fileURLToPath } from "url";
@@ -35,12 +35,10 @@ for (const file of eventFiles) {
   const filePath = join(eventsPath, file);
   const event = (await import(filePath)).default;
   if (event.once) {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     client.once(event.name, (...args: any[]) => event.execute(...args));
   } else {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     client.on(event.name, (...args: any[]) => event.execute(...args));
   }
 }
 
-client.login(config.apis.discord.token);
+client.login(config.api.discord.token);

@@ -4,12 +4,13 @@
   },
   "relays": [
     {
-      "webhookURL": [],
+      "webhookURL": "",
       "guildIds": [],
-      "channelIds": []
+      "channelIds": [],
+      "userIds": []
     }
   ],
-  "logs": {
+  "logging": {
     "console": {
       "level": "info",
       "timestampFormat": "YYYY-MM-DD hh:mm:ss A"
@@ -21,14 +22,14 @@
       "maxSize": "10m"
     }
   },
-  "apis": {
+  "api": {
     "discord": {
       "token": "",
       "clientId": "",
       "guildId": ""
     },
     "openai": {
-      "secretKey": ""
+      "key": ""
     }
   }
 }

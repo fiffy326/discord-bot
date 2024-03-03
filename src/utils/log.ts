@@ -1,4 +1,4 @@
-import config from "../../config.json" with { type: "json" };
+import config from "./config.js";
 import chalk from "chalk";
 import DailyRotateFile from "winston-daily-rotate-file";
 import { createLogger, format, transports } from "winston";
@@ -25,7 +25,7 @@ const logLevels = {
 
 const consoleFormat = combine(
   padLevels({ levels: logLevels.levels }),
-  timestamp({ format: config.logs.console.timestampFormat }),
+  timestamp({ format: config.logging.console.timestampFormat }),
   colorize({ colors: logLevels.colors, level: true }),
   format(info => {
     info.level = `[${info.level}]`;
@@ -42,20 +42,19 @@ const logger = createLogger({
   transports: [
     new transports.Console({
       format: consoleFormat,
-      level: config.logs.console.level,
+      level: config.logging.console.level,
     }),
     new DailyRotateFile({
       format: combine(timestamp(), json()),
-      level: config.logs.file.level,
-      datePattern: config.logs.file.datePattern,
-      maxFiles: config.logs.file.maxFiles,
-      maxSize: config.logs.file.maxSize,
+      level: config.logging.file.level,
+      datePattern: config.logging.file.datePattern,
+      maxFiles: config.logging.file.maxFiles,
+      maxSize: config.logging.file.maxSize,
       filename: "logs/%DATE%.log",
     }),
   ],
 });
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
 export const log = {
   fatal: (message: any) => logger.log("fatal", message),
   error: (message: any) => logger.log("error", message),

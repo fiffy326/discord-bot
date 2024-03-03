@@ -1,10 +1,10 @@
+import Event from "../interfaces/event.js";
 import log from "../utils/log.js";
 import { Events } from "discord.js";
 
-export default {
+export const event: Event = {
   name: Events.InteractionCreate,
   once: false,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   async execute(interaction: any) {
     if (!interaction.isChatInputCommand()) return;
 
@@ -32,3 +32,5 @@ export default {
     }
   },
 };
+
+export default event;
