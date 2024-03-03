@@ -26,6 +26,7 @@
     "no-var": "error",
     "prefer-const": "error",
     "spaced-comment": "off",
-    "yoda": "error"
+    "yoda": "error",
+    "@typescript-eslint/no-explicit-any": "off"
   }
 }
