@@ -27,9 +27,17 @@ export const event: Event = {
         const channel = <TextChannel>message.channel;
         const channelName = channel.name;
         const username = message.author.username;
-        const content = !message.content
-          ? zeroWidthSpace
-          : cleanContent(message.content, channel);
+
+        let content: string;
+
+        if (!message.content) {
+          content = zeroWidthSpace;
+        } else {
+          content = message.cleanContent
+            .replaceAll("@everyone", `@${zeroWidthSpace}everyone`)
+            .replaceAll("@here", `@${zeroWidthSpace}here`);
+        }
+
         webhookClient.send({
           content: content,
           username: `${username} [#${channelName}]`,
