@@ -17,8 +17,8 @@ const logLevels = {
     fatal: "bold red",
     error: "red",
     warn: "yellow",
-    info: "green",
-    debug: "blue",
+    info: "blue",
+    debug: "cyan",
     trace: "magenta",
   },
 };

@@ -5,8 +5,11 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
+    "test": "npm run clean && npm run build && npm run start",
     "dev": "nodemon -w src -e ts -x npm run clean:build:start",
-    "start": "node dist/src/index.js",
+    "start": "NODE_NO_WARNINGS=1 node dist/src/index.js",
+    "build": "tsc",
+    "clean": "rm -rf dist logs",
     "deploy:global": "node dist/src/deploy-commands.js global",
     "deploy:guild": "node dist/src/deploy-commands.js guild",
     "delete:global": "node dist/src/delete-commands.js global",
@@ -15,8 +18,6 @@
     "lint:fix": "eslint --fix .",
     "format": "prettier --check .",
     "format:fix": "prettier --write .",
-    "build": "tsc",
-    "clean": "rm -rf dist logs",
     "clean:build:start": "npm run clean && npm run build && npm run start"
   },
   "keywords": [],
