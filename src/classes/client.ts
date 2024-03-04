@@ -2,17 +2,8 @@ import Discord, { GatewayIntentBits } from "discord.js";
 
 export class Client extends Discord.Client {
   commands: Discord.Collection<any, any>;
-  constructor() {
-    super({
-      intents: [
-        GatewayIntentBits.Guilds,
-        GatewayIntentBits.GuildMembers,
-        GatewayIntentBits.GuildMessages,
-        GatewayIntentBits.GuildPresences,
-        GatewayIntentBits.GuildMessageReactions,
-        GatewayIntentBits.MessageContent,
-      ],
-    });
+  constructor(intents: Array<GatewayIntentBits>) {
+    super({ intents: intents });
     this.commands = new Discord.Collection();
   }
 }

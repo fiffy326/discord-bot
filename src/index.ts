@@ -4,8 +4,16 @@ import log from "./utils/log.js";
 import { dirname, join } from "path";
 import { fileURLToPath } from "url";
 import { readdirSync } from "fs";
+import { GatewayIntentBits } from "discord.js";
 
-const client = new Client();
+const client = new Client([
+  GatewayIntentBits.Guilds,
+  GatewayIntentBits.GuildMembers,
+  GatewayIntentBits.GuildMessages,
+  GatewayIntentBits.GuildPresences,
+  GatewayIntentBits.GuildMessageReactions,
+  GatewayIntentBits.MessageContent
+]);
 
 /* Emulate __dirname inside ESM */
 const __filename = fileURLToPath(import.meta.url);
