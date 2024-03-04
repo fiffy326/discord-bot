@@ -1,5 +1,6 @@
 {
   "bot": {
+    "ownerId": "",
     "username": "",
     "avatarURL": "",
     "status": "online",
