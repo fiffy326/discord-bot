@@ -1,10 +1,11 @@
 import Command from "../../interfaces/command.js";
-import Discord, { GuildMember, ReactionCollector, SlashCommandBuilder, User } from "discord.js";
+import config from "../../utils/config.js";
+import Discord, { GuildMember, ReactionCollector, SlashCommandBuilder } from "discord.js";
 
-const muteThreshold = 3;
-const mutedRoleName = "Incel";
-const muteDuration = 300_000; // 5 mins
-const voteDuration = 300_000; // 5 mins
+const muteThreshold = config.bot.muteThreshold;
+const mutedRoleName = config.bot.mutedRole;
+const muteDuration = config.bot.muteDuration;
+const voteDuration = config.bot.voteDuration;
 const yesEmoji = "✅";
 const noEmoji = "🚫";
 
@@ -32,7 +33,7 @@ const command: Command = {
   async execute(interaction: Discord.ChatInputCommandInteraction) {
     const user = interaction.options.getUser("user");
 
-    await interaction.reply(`Should ${user} be muted? (${muteThreshold} net votes required)`);
+    await interaction.reply(`Should ${user} be muted? (${muteThreshold - 1} net votes required)`);
 
     const message = await interaction.fetchReply();
     message.react(yesEmoji);
@@ -49,7 +50,7 @@ const command: Command = {
     });
 
     const guild = interaction.guild;
-    const member = guild!.members.cache.find(member => member.id === user!.id);
+    const member = guild!.members.cache.find(m => m.id === user!.id);
 
     yesVotes.on("end", () => {
       if (votePassed(yesVotes, noVotes)) muteMember(member!);

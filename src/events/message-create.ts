@@ -2,7 +2,6 @@ import config from "../utils/config.js";
 import Event from "../interfaces/event.js";
 import Relay from "../interfaces/relay.js";
 import {
-  cleanContent,
   Events,
   Message,
   TextChannel,

@@ -1,13 +1,23 @@
 {
   "bot": {
-    "status": "online"
+    "username": "",
+    "avatarURL": "",
+    "status": "online",
+    "activityType": "",
+    "activityName": "",
+    "welcomeChannelId": "",
+    "mutedRole": "",
+    "muteThreshold": 5,
+    "muteDuration": 300000,
+    "voteDuration": 300000
   },
   "relays": [
     {
+      "name": "",
       "webhookURL": "",
-      "guildIds": [],
-      "channelIds": [],
-      "userIds": []
+      "guildIds": [""],
+      "channelIds": [""],
+      "userIds": [""]
     }
   ],
   "logging": {
