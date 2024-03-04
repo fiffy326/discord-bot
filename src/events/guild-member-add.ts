@@ -7,10 +7,12 @@ export const event: Event = {
   once: false,
   async execute(member: GuildMember) {
     const welcomeChannelId = config.bot.welcomeChannelId;
-    const welcomeChannel = <TextChannel>(await member.client.channels.fetch(welcomeChannelId));
+    const welcomeChannel = <TextChannel>(
+      await member.client.channels.fetch(welcomeChannelId)
+    );
     if (member.guild != welcomeChannel.guild) return;
     welcomeChannel.send(`Welcome to the server, ${member}!`);
-  }
+  },
 };
 
 export default event;

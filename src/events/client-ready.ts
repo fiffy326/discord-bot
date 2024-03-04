@@ -39,7 +39,7 @@ export const event: Event = {
     client.user!.setPresence({
       afk: false,
       status: <PresenceStatusData>config.bot.status,
-      activities: [{ type: activityType, name: config.bot.activityName }]
+      activities: [{ type: activityType, name: config.bot.activityName }],
     });
   },
 };

@@ -1,12 +1,7 @@
 import config from "../utils/config.js";
 import Event from "../interfaces/event.js";
 import Relay from "../interfaces/relay.js";
-import {
-  Events,
-  Message,
-  TextChannel,
-  WebhookClient,
-} from "discord.js";
+import { Events, Message, TextChannel, WebhookClient } from "discord.js";
 
 const zeroWidthSpace = "​";
 const relays: Array<Relay> = config.relays;

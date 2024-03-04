@@ -33,25 +33,30 @@ const rest = new REST().setToken(config.api.discord.token);
 
 function deployGlobalCommands(commands: Array<Command>) {
   log.info(`Started deploying ${commands.length} global commands.`);
-  rest.put(
-    Routes.applicationCommands(config.api.discord.clientId),
-    { body: commands }
-  )
-  .then((data: any) => log.info(`Finished deploying ${data.length} global commands.`))
-  .catch(log.error);
+  rest
+    .put(Routes.applicationCommands(config.api.discord.clientId), {
+      body: commands,
+    })
+    .then((data: any) =>
+      log.info(`Finished deploying ${data.length} global commands.`)
+    )
+    .catch(log.error);
 }
 
 function deployGuildCommands(commands: Array<Command>) {
   log.info(`Started deploying ${commands.length} guild commands.`);
-  rest.put(
-    Routes.applicationGuildCommands(
-      config.api.discord.clientId,
-      config.api.discord.guildId
-    ),
-    { body: commands }
-  )
-  .then((data: any) => log.info(`Finished deploying ${data.length} guild commands.`))
-  .catch(log.error);
+  rest
+    .put(
+      Routes.applicationGuildCommands(
+        config.api.discord.clientId,
+        config.api.discord.guildId
+      ),
+      { body: commands }
+    )
+    .then((data: any) =>
+      log.info(`Finished deploying ${data.length} guild commands.`)
+    )
+    .catch(log.error);
 }
 
 switch (argv[2]) {

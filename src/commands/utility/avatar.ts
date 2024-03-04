@@ -6,7 +6,8 @@ const command: Command = {
     .setName("avatar")
     .setDescription("Show a user's avatar image")
     .addUserOption(option =>
-      option.setName("user").setDescription("User who's avatar to show"))
+      option.setName("user").setDescription("User who's avatar to show")
+    )
     .addBooleanOption(option =>
       option.setName("ephemeral").setDescription("Only show response to you")
     ),

@@ -30,11 +30,11 @@ const command: Command = {
       "My reply is no.",
       "My sources say no.",
       "Outlook not so good.",
-      "Very doubtful."
+      "Very doubtful.",
     ];
     const answer = answers[Math.floor(Math.random() * answers.length)];
     interaction.reply({ content: answer, ephemeral: ephemeral });
-  }
+  },
 };
 
 export default command;

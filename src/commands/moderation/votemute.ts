@@ -1,6 +1,10 @@
 import Command from "../../interfaces/command.js";
 import config from "../../utils/config.js";
-import Discord, { GuildMember, ReactionCollector, SlashCommandBuilder } from "discord.js";
+import Discord, {
+  GuildMember,
+  ReactionCollector,
+  SlashCommandBuilder,
+} from "discord.js";
 
 const muteThreshold = config.bot.muteThreshold;
 const mutedRoleName = config.bot.mutedRole;
@@ -10,8 +14,9 @@ const yesEmoji = "✅";
 const noEmoji = "🚫";
 
 function muteMember(member: GuildMember) {
-  console.log(`Muting ${member}`);
-  const mutedRole = member.guild.roles.cache.find(role => role.name === mutedRoleName);
+  const mutedRole = member.guild.roles.cache.find(
+    r => r.name === mutedRoleName
+  );
   if (!member.roles.cache.has(mutedRoleName)) {
     member.roles.add(mutedRole!);
     setTimeout(() => {
@@ -20,33 +25,39 @@ function muteMember(member: GuildMember) {
   }
 }
 
-function votePassed(yesVotes: ReactionCollector, noVotes: ReactionCollector): boolean {
-  return ((yesVotes.total - noVotes.total) >= muteThreshold);
+function votePassed(
+  yesVotes: ReactionCollector,
+  noVotes: ReactionCollector
+): boolean {
+  return yesVotes.total - noVotes.total >= muteThreshold;
 }
 
 const command: Command = {
   data: new SlashCommandBuilder()
     .setName("votemute")
     .setDescription("Starts a vote to mute a user")
-    .addUserOption(option => option
-      .setName("user").setDescription("User to mute").setRequired(true)),
+    .addUserOption(option =>
+      option.setName("user").setDescription("User to mute").setRequired(true)
+    ),
   async execute(interaction: Discord.ChatInputCommandInteraction) {
     const user = interaction.options.getUser("user");
 
-    await interaction.reply(`Should ${user} be muted? (${muteThreshold - 1} net votes required)`);
+    await interaction.reply(
+      `Should ${user} be muted?\n(${muteThreshold - 1} net votes required)`
+    );
 
     const message = await interaction.fetchReply();
     message.react(yesEmoji);
     message.react(noEmoji);
 
     const yesVotes = message.createReactionCollector({
-      filter: reaction => reaction.emoji.name === yesEmoji,
-      time: voteDuration
+      filter: r => r.emoji.name === yesEmoji,
+      time: voteDuration,
     });
 
     const noVotes = message.createReactionCollector({
-      filter: reaction => reaction.emoji.name === noEmoji,
-      time: voteDuration
+      filter: r => r.emoji.name === noEmoji,
+      time: voteDuration,
     });
 
     const guild = interaction.guild;
@@ -80,19 +91,18 @@ const command: Command = {
       if (votePassed(yesVotes, noVotes)) muteMember(member!);
     });
 
-    noVotes.on("remove",() => {
+    noVotes.on("remove", () => {
       if (votePassed(yesVotes, noVotes)) muteMember(member!);
     });
 
-    noVotes.on("ignore",() => {
+    noVotes.on("ignore", () => {
       if (votePassed(yesVotes, noVotes)) muteMember(member!);
     });
 
     noVotes.on("dispose", () => {
       if (votePassed(yesVotes, noVotes)) muteMember(member!);
     });
-
-  }
+  },
 };
 
 export default command;

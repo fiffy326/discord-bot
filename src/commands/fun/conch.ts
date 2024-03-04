@@ -21,11 +21,11 @@ const command: Command = {
       "You cannot get to the top by sitting on your bottom.",
       "I see a new sauce in your future.",
       "Ask next time.",
-      "Follow the seahorse."
+      "Follow the seahorse.",
     ];
     const answer = answers[Math.floor(Math.random() * answers.length)];
     interaction.reply({ content: answer, ephemeral: ephemeral });
-  }
+  },
 };
 
 export default command;

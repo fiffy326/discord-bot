@@ -10,7 +10,7 @@ export class Client extends Discord.Client {
         GatewayIntentBits.GuildMessages,
         GatewayIntentBits.GuildPresences,
         GatewayIntentBits.GuildMessageReactions,
-        GatewayIntentBits.MessageContent
+        GatewayIntentBits.MessageContent,
       ],
     });
     this.commands = new Discord.Collection();
