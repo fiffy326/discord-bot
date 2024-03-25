@@ -12,7 +12,7 @@ const client = new Client([
   GatewayIntentBits.GuildMessages,
   GatewayIntentBits.GuildPresences,
   GatewayIntentBits.GuildMessageReactions,
-  GatewayIntentBits.MessageContent
+  GatewayIntentBits.MessageContent,
 ]);
 
 /* Emulate __dirname inside ESM */

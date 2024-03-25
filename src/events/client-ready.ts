@@ -7,12 +7,11 @@ export const event: Event = {
   name: Events.ClientReady,
   once: true,
   async execute(client: Client) {
-    log.info(`Logged in as ${client.user!.tag}`);
-    if (config.bot.username) client.user!.setUsername(config.bot.username);
-    if (config.bot.avatarURL) client.user!.setAvatar(config.bot.avatarURL);
+    if (config.bot.username) client.user?.setUsername(config.bot.username);
+    if (config.bot.avatarURL) client.user?.setAvatar(config.bot.avatarURL);
 
     let activityType: ActivityType | undefined;
-    switch (config.bot.activityType) {
+    switch (config.bot.activity.type) {
       case "playing":
         activityType = ActivityType.Playing;
         break;
@@ -36,11 +35,12 @@ export const event: Event = {
         break;
     }
 
-    client.user!.setPresence({
-      afk: false,
+    client.user?.setPresence({
       status: <PresenceStatusData>config.bot.status,
-      activities: [{ type: activityType, name: config.bot.activityName }],
+      activities: [{ type: activityType, name: config.bot.activity.name }],
     });
+
+    log.info(`Logged into Discord as ${client.user?.tag}`);
   },
 };
 

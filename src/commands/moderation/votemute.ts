@@ -1,35 +1,29 @@
 import Command from "../../interfaces/command.js";
 import config from "../../utils/config.js";
-import Discord, {
+import {
+  ChatInputCommandInteraction,
   GuildMember,
-  ReactionCollector,
   SlashCommandBuilder,
+  TextBasedChannel,
 } from "discord.js";
+import ms from "ms";
 
-const muteThreshold = config.bot.muteThreshold;
-const mutedRoleName = config.bot.mutedRole;
-const muteDuration = config.bot.muteDuration;
-const voteDuration = config.bot.voteDuration;
-const yesEmoji = "✅";
-const noEmoji = "🚫";
+const muteThreshold = config.bot.muteThreshold + 1;
+const muteRoleName = config.bot.muteRole;
+const muteDuration = ms(config.bot.muteDuration);
+const voteDuration = ms("30m");
+const voteEmoji = "🔇";
 
-function muteMember(member: GuildMember) {
-  const mutedRole = member.guild.roles.cache.find(
-    r => r.name === mutedRoleName
-  );
-  if (!member.roles.cache.has(mutedRoleName)) {
-    member.roles.add(mutedRole!);
-    setTimeout(() => {
-      member.roles.remove(mutedRole!);
-    }, muteDuration);
-  }
+function isMuted(member: GuildMember): boolean {
+  return member.roles.cache.has(muteRoleName);
 }
 
-function votePassed(
-  yesVotes: ReactionCollector,
-  noVotes: ReactionCollector
-): boolean {
-  return yesVotes.total - noVotes.total >= muteThreshold;
+function mute(member: GuildMember, channel: TextBasedChannel): void {
+  const muteRole = member.guild.roles.cache.find(r => r.name === muteRoleName);
+  if (isMuted(member)) return;
+  member.roles.add(muteRole!);
+  channel.send(`${member} has been muted.`);
+  setTimeout(() => member.roles.remove(muteRole!), muteDuration);
 }
 
 const command: Command = {
@@ -39,68 +33,31 @@ const command: Command = {
     .addUserOption(option =>
       option.setName("user").setDescription("User to mute").setRequired(true)
     ),
-  async execute(interaction: Discord.ChatInputCommandInteraction) {
+  async execute(interaction: ChatInputCommandInteraction) {
+    const guild = interaction.guild;
+    const channel = interaction.channel;
     const user = interaction.options.getUser("user");
+    const member = guild!.members.cache.find(m => m.id === user!.id);
 
     await interaction.reply(
-      `Should ${user} be muted?\n(${muteThreshold - 1} net votes required)`
+      `Should ${user} be muted?\n(${muteThreshold} votes required)`
     );
 
     const message = await interaction.fetchReply();
-    message.react(yesEmoji);
-    message.react(noEmoji);
 
-    const yesVotes = message.createReactionCollector({
-      filter: r => r.emoji.name === yesEmoji,
+    message.react(voteEmoji);
+
+    const votes = message.createReactionCollector({
+      filter: r => r.emoji.name === voteEmoji,
       time: voteDuration,
     });
 
-    const noVotes = message.createReactionCollector({
-      filter: r => r.emoji.name === noEmoji,
-      time: voteDuration,
+    votes.on("collect", () => {
+      if (votes.total >= muteThreshold) mute(member!, channel!);
     });
 
-    const guild = interaction.guild;
-    const member = guild!.members.cache.find(m => m.id === user!.id);
-
-    yesVotes.on("end", () => {
-      if (votePassed(yesVotes, noVotes)) muteMember(member!);
-    });
-
-    yesVotes.on("collect", () => {
-      if (votePassed(yesVotes, noVotes)) muteMember(member!);
-    });
-
-    yesVotes.on("remove", () => {
-      if (votePassed(yesVotes, noVotes)) muteMember(member!);
-    });
-
-    yesVotes.on("ignore", () => {
-      if (votePassed(yesVotes, noVotes)) muteMember(member!);
-    });
-
-    yesVotes.on("dispose", () => {
-      if (votePassed(yesVotes, noVotes)) muteMember(member!);
-    });
-
-    noVotes.on("end", () => {
-      if (votePassed(yesVotes, noVotes)) muteMember(member!);
-    });
-
-    noVotes.on("collect", () => {
-      if (votePassed(yesVotes, noVotes)) muteMember(member!);
-    });
-
-    noVotes.on("remove", () => {
-      if (votePassed(yesVotes, noVotes)) muteMember(member!);
-    });
-
-    noVotes.on("ignore", () => {
-      if (votePassed(yesVotes, noVotes)) muteMember(member!);
-    });
-
-    noVotes.on("dispose", () => {
-      if (votePassed(yesVotes, noVotes)) muteMember(member!);
+    votes.on("remove", () => {
+      if (votes.total >= muteThreshold) mute(member!, channel!);
     });
   },
 };

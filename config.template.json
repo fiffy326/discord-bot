@@ -1,24 +1,23 @@
 {
   "bot": {
-    "ownerId": "",
     "username": "",
     "avatarURL": "",
     "status": "online",
-    "activityType": "",
-    "activityName": "",
+    "activity": {
+      "type": "",
+      "name": ""
+    },
     "welcomeChannelId": "",
-    "mutedRole": "",
-    "muteThreshold": 5,
-    "muteDuration": 300000,
-    "voteDuration": 300000
+    "muteRole": "",
+    "muteDuration": "15m",
+    "muteThreshold": 5
   },
   "relays": [
     {
-      "name": "",
       "webhookURL": "",
-      "guildIds": [""],
-      "channelIds": [""],
-      "userIds": [""]
+      "guildIds": [],
+      "channelIds": [],
+      "userIds": []
     }
   ],
   "logging": {

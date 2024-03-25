@@ -4,7 +4,7 @@ import { SlashCommandBuilder } from "discord.js";
 const command: Command = {
   data: new SlashCommandBuilder()
     .setName("conch")
-    .setDescription("Generates a magic conch answer.")
+    .setDescription("Generates a magic conch answer")
     .addBooleanOption(option =>
       option.setName("ephemeral").setDescription("Only show response to you")
     ),

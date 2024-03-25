@@ -4,7 +4,7 @@ import { SlashCommandBuilder } from "discord.js";
 const command: Command = {
   data: new SlashCommandBuilder()
     .setName("random")
-    .setDescription("Generates a random number.")
+    .setDescription("Generates a random number")
     .addNumberOption(option => option.setName("min").setDescription("Minimum"))
     .addNumberOption(option => option.setName("max").setDescription("Maximum"))
     .addBooleanOption(option =>
