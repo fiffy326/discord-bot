@@ -48,6 +48,7 @@
     "commander": "^12.1.0",
     "dayjs": "^1.11.11",
     "lodash": "^4.17.21",
+    "puppeteer": "^22.12.1",
     "smol-toml": "^1.2.2",
     "undici": "^6.19.2",
     "winston": "^3.13.0",
