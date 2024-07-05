@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/fiffy326/discord-bot/issues"
   },
-  "homepage": "https://github.com/fiffy326/discord-bot#readme"
+  "homepage": "https://github.com/fiffy326/discord-bot#readme",
+  "devDependencies": {
+    "typescript": "^5.5.3"
+  }
 }
