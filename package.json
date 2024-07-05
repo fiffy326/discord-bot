@@ -24,5 +24,8 @@
     "globals": "^15.8.0",
     "typescript": "^5.5.3",
     "typescript-eslint": "^7.15.0"
+  },
+  "overrides": {
+    "eslint": "^9.6.0"
   }
 }
