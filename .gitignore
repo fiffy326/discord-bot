@@ -5,6 +5,9 @@ node_modules/
 # Transpiler output
 dist/
 
+# Bot logs
+logs/
+
 # Environment variables
 .env
 
