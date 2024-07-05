@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/fiffy326/discord-bot#readme",
   "devDependencies": {
+    "@types/node": "^20.14.9",
     "typescript": "^5.5.3"
   }
 }
