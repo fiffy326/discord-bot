@@ -5,7 +5,16 @@
   "type": "module",
   "main": "./dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "format": "prettier --check \"./src/**/*.{js,mjs,cjs,ts}\"",
+    "format:fix": "prettier --write \"./src/**/*.{js,mjs,cjs,ts}\"",
+    "lint": "eslint \"./src/**/*.{js,mjs,cjs,ts}\"",
+    "lint:fix": "eslint --fix \"./src/**/*.{js,mjs,cjs,ts}\"",
+    "clean:dist": "rimraf ./dist",
+    "clean:logs": "rimraf ./logs",
+    "prebuild": "npm run clean:dist",
+    "build": "tsc",
+    "start": "node --env-file=.env .",
+    "watch": "nodemon -w ./src -e ts -x \"npm run build && npm run start\""
   },
   "repository": {
     "type": "git",
