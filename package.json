@@ -46,6 +46,7 @@
   "dependencies": {
     "chalk": "^5.3.0",
     "commander": "^12.1.0",
+    "dayjs": "^1.11.11",
     "lodash": "^4.17.21",
     "smol-toml": "^1.2.2",
     "winston": "^3.13.0",
