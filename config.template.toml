@@ -1,0 +1,26 @@
+[user]
+id = ""
+#name = ""
+#online_status = "" # online, idle, dnd, invisible
+#activity.type = "" # custom, playing, watching, listening, streaming, competing
+#activity.name = ""
+
+#[[guilds]]
+#id = ""
+#deploy_commands = false
+#join_channel_id = ""
+
+#[[relays]]
+#webhook_id = ""
+#webhook_token = ""
+#guild_ids = []
+#channel_ids = []
+#user_ids = []
+
+#[log.console]
+#level = "" # fatal, error, warn, info, debug, trace
+
+#[log.file]
+#level = "" # fatal, error, warn, info, debug, trace
+#max_days = 14
+#compress = false
