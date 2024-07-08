@@ -21,10 +21,22 @@ export default {
     const ephemeral = interaction.options.getBoolean("ephemeral") ?? false;
 
     // Make sure the arguments are valid.
-    if (width < 1) await interaction.reply({ content: "Minimum viewport width is 1 px", ephemeral: ephemeral });
-    if (width > 4096) await interaction.reply({ content: "Maximum viewport width is 4096 px", ephemeral: ephemeral });
-    if (height < 1) await interaction.reply({ content: "Minimum viewport height is 1 px", ephemeral: ephemeral });
-    if (height > 2160) await interaction.reply({ content: "Maximum viewport height is 2160 px", ephemeral: ephemeral });
+    if (width < 1) {
+      await interaction.reply({ content: "Minimum viewport width is 1 px", ephemeral: ephemeral });
+      return;
+    }
+    if (width > 4096) {
+      await interaction.reply({ content: "Maximum viewport width is 4096 px", ephemeral: ephemeral });
+      return;
+    }
+    if (height < 1) {
+      await interaction.reply({ content: "Minimum viewport height is 1 px", ephemeral: ephemeral });
+      return;
+    }
+    if (height > 2160) {
+      await interaction.reply({ content: "Maximum viewport height is 2160 px", ephemeral: ephemeral });
+      return;
+    }
 
     // Defer the reply until the screenshot has been taken.
     await interaction.deferReply({ ephemeral: ephemeral });
