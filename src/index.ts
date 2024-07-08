@@ -94,7 +94,7 @@ program
   .option("-s, --shared [ids]", "deploy slash commands (shared)", splitList, [])
   .action(async (options) => commandManager(CommandManagerAction.DEPLOY, options));
 program
-  .command("deploy")
+  .command("delete")
   .description("delete slash commands (default: shared)")
   .option("-G, --global", "delete slash commands (global)", false)
   .option("-g, --guilds [ids]", "delete slash commands (guilds)", splitList, [])
