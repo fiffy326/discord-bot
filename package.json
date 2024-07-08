@@ -12,7 +12,7 @@
     "clean:dist": "rimraf ./dist",
     "clean:logs": "rimraf ./logs",
     "prebuild": "npm run clean:dist",
-    "build": "tsc",
+    "build": "tsc && tsc-alias",
     "start": "node --env-file=.env .",
     "watch": "nodemon -w ./src -e ts -x \"npm run build && npm run start\""
   },
