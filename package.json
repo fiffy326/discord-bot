@@ -38,6 +38,7 @@
     "nodemon": "^3.1.4",
     "prettier": "3.3.2",
     "rimraf": "^5.0.7",
+    "tsc-alias": "^1.8.10",
     "type-fest": "^4.21.0",
     "typescript": "^5.5.3",
     "typescript-eslint": "^7.15.0"
