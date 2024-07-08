@@ -31,6 +31,7 @@
     "@eslint/js": "^9.6.0",
     "@types/lodash": "^4.17.6",
     "@types/node": "^20.14.9",
+    "concurrently": "^8.2.2",
     "eslint": "^9.6.0",
     "eslint-config-prettier": "^9.1.0",
     "globals": "^15.8.0",
