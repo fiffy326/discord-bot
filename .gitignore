@@ -8,6 +8,9 @@ dist/
 # Bot logs
 logs/
 
+# Bot runtime data
+data/
+
 # Environment variables
 .env
 
