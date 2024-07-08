@@ -21,13 +21,12 @@ interface CommandManagerOptions {
 }
 
 async function commandManager(action: CommandManagerAction, options: CommandManagerOptions): Promise<void> {
-  const globalFlag = options.global;
-  const guildsFlag = options.guilds === true || Array.isArray(options.guilds);
-  const sharedFlag = options.shared === true || Array.isArray(options.shared);
+  let globalFlag = options.global;
+  let guildsFlag = options.guilds === true || Array.isArray(options.guilds) && options.guilds.length !== 0;
+  let sharedFlag = options.shared === true || Array.isArray(options.shared) && options.shared.length !== 0;
   const totalFlags = (globalFlag ? 1 : 0) + (guildsFlag ? 1 : 0) + (sharedFlag ? 1 : 0);
   if (totalFlags === 0) {
-    log.fatal("Too few options were provided");
-    process.exit(1);
+    sharedFlag = true; // Default to 'shared' if no options are provided.
   }
   if (totalFlags > 1) {
     log.fatal("Too many options were provided");
