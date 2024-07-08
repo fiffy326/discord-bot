@@ -1,4 +1,4 @@
-import { Command } from "../bot/command.js";
+import { Command } from "@bot/command.js";
 import dayjs from "dayjs";
 import { ChatInputCommandInteraction, EmbedBuilder, SlashCommandBuilder } from "discord.js";
 

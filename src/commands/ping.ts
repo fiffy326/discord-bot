@@ -1,5 +1,5 @@
-import { emoji } from "../utils/emoji.js";
-import { Command } from "../bot/command.js";
+import { Command } from "@bot/command.js";
+import { emoji } from "@utils/emoji.js";
 import { ChatInputCommandInteraction, EmbedBuilder, SlashCommandBuilder } from "discord.js";
 
 export default {

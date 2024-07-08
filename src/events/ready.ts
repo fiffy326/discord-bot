@@ -1,8 +1,8 @@
-import { Client } from "../bot/client.js";
-import { Event } from "../bot/event.js";
-import { config } from "../utils/config.js";
-import { emoji } from "../utils/emoji.js";
-import { log } from "../utils/log.js";
+import { Client } from "@bot/client.js";
+import { Event } from "@bot/event.js";
+import { config } from "@utils/config.js";
+import { emoji } from "@utils/emoji.js";
+import { log } from "@utils/log.js";
 import { ActivityType } from "discord.js";
 
 async function updateName(client: Client): Promise<void> {

@@ -1,5 +1,5 @@
-import { Command, loadCommandFiles } from "./command.js";
-import { loadEventFiles } from "./event.js";
+import { Command, loadCommandFiles } from "@bot/command.js";
+import { loadEventFiles } from "@bot/event.js";
 import { Client as DiscordClient, Collection, GatewayIntentBits } from "discord.js";
 
 export class Client extends DiscordClient {

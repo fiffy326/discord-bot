@@ -1,5 +1,5 @@
-import { Event } from "../bot/event.js";
-import { log } from "../utils/log.js";
+import { Event } from "@bot/event.js";
+import { log } from "@utils/log.js";
 
 export default {
   name: "error",

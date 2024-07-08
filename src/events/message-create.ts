@@ -1,6 +1,6 @@
-import { Event } from "../bot/event.js";
-import { Relay } from "../bot/relay.js";
-import { config } from "../utils/config.js";
+import { Event } from "@bot/event.js";
+import { Relay } from "@bot/relay.js";
+import { config } from "@utils/config.js";
 import { Message, TextChannel, WebhookClient } from "discord.js";
 
 const relays: Relay[] = config.relays;

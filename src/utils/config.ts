@@ -49,7 +49,7 @@ const logSchema = z.object({
   file: logFileSchema.default({}),
 });
 
-const environmentSchema = z.object({
+const envSchema = z.object({
   DISCORD_TOKEN: z.string().default(process.env.DISCORD_TOKEN ?? ""),
   OPENAI_API_TOKEN: z.string().default(process.env.OPENAI_API_TOKEN ?? ""),
   DB_HOST: z.string().default(process.env.DB_HOST ?? ""),
@@ -64,7 +64,7 @@ const configSchema = z.object({
   guilds: z.array(guildSchema).default([]),
   relays: z.array(relaySchema).default([]),
   log: logSchema.default({}),
-  environment: environmentSchema.default({}),
+  env: envSchema.default({}),
 });
 
 function parseConfig(relativePath: string): z.infer<typeof configSchema> {

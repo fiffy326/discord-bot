@@ -1,27 +1,37 @@
-import { Client } from "../bot/client.js";
-import { Event } from "../bot/event.js";
-import { log } from "../utils/log.js";
-import { Interaction } from "discord.js";
+import { Client } from "@bot/client.js";
+import { Event } from "@bot/event.js";
+import { log } from "@utils/log.js";
+import { ChatInputCommandInteraction, Interaction } from "discord.js";
+
+async function dispatchCommand(interaction: ChatInputCommandInteraction): Promise<void> {
+  const client = interaction.client as Client;
+  const command = client.commands.get(interaction.commandName);
+
+  if (!command) {
+    const errorMessage = `Command not found: ${interaction.commandName}`;
+    await interaction.reply({ content: errorMessage, ephemeral: true });
+    log.error(errorMessage);
+    return;
+  }
+
+  try {
+    await command.callback(interaction);
+  } catch (e) {
+    log.error((e as Error).message);
+    const errorMessage = "Failed to execute command";
+    if (interaction.replied || interaction.deferred) {
+      await interaction.followUp({ content: errorMessage, ephemeral: true });
+    } else {
+      await interaction.reply({ content: errorMessage, ephemeral: true });
+    }
+  }
+}
 
 export default {
   name: "interactionCreate",
   async callback(interaction: Interaction): Promise<void> {
-    if (!interaction.isChatInputCommand()) return;
-
-    const command = (interaction.client as Client).commands.get(interaction.commandName);
-    if (!command) {
-      log.error(`No command found: ${interaction.commandName}`);
-      return;
+    if (interaction.isChatInputCommand()) {
+      await dispatchCommand(interaction);
     }
-
-    await command.callback(interaction).catch(async (error) => {
-      log.error(error.message);
-      const errorReply = "There was an error while executing this command.";
-      if (interaction.replied || interaction.deferred) {
-        await interaction.followUp({ content: errorReply, ephemeral: true });
-      } else {
-        await interaction.reply({ content: errorReply, ephemeral: true });
-      }
-    });
   },
 } as Event;

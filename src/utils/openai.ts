@@ -1,4 +1,4 @@
-import { config } from "./config.js";
+import { config } from "@utils/config.js";
 import { OpenAI } from "openai";
 
-export const openai = new OpenAI({ apiKey: config.environment.OPENAI_API_TOKEN });
+export const openai = new OpenAI({ apiKey: config.env.OPENAI_API_TOKEN });

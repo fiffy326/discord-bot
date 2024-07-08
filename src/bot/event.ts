@@ -1,6 +1,6 @@
-import { log } from "../utils/log.js";
+import { log } from "@utils/log.js";
 import { ClientEvents } from "discord.js";
-import { readdirSync } from "node:fs";
+import { readdir } from "node:fs/promises";
 import { resolve } from "node:path";
 
 export interface Event {
@@ -12,7 +12,7 @@ export interface Event {
 export async function loadEventFiles(): Promise<Event[]> {
   const events: Event[] = [];
   const dirPath = resolve(import.meta.dirname, "../events");
-  const files = readdirSync(dirPath).filter((file) => file.endsWith(".js"));
+  const files = (await readdir(dirPath)).filter((f) => f.endsWith(".js"));
   for (const file of files) {
     const filePath = resolve(dirPath, file);
     const event: Event = (await import(filePath)).default;

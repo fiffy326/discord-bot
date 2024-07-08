@@ -1,4 +1,4 @@
-import { Command } from "../bot/command.js";
+import { Command } from "@bot/command.js";
 import { AttachmentBuilder, ChatInputCommandInteraction, SlashCommandBuilder } from "discord.js";
 import { resolve } from "node:path";
 import puppeteer from "puppeteer";
