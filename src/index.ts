@@ -16,7 +16,7 @@ program
       .login(config.environment.DISCORD_TOKEN)
       .then(() => client.loadEvents())
       .then(() => client.loadCommands())
-      .catch((e) => log.error(e.message));
+      .catch((error) => log.error(error.message));
   });
 
 program

@@ -8,7 +8,7 @@ const zeroWidthSpace = String.fromCharCode(0x200b);
 
 export default {
   name: "messageCreate",
-  async callback(message: Message) {
+  async callback(message: Message): Promise<void> {
     if (message.author.bot || message.webhookId || !message.channel.isTextBased()) return;
     for (const relay of relays) {
       const isRelayGuild = relay.guild_ids.includes(message.guildId ?? "");

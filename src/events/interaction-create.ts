@@ -5,7 +5,7 @@ import { Interaction } from "discord.js";
 
 export default {
   name: "interactionCreate",
-  async callback(interaction: Interaction) {
+  async callback(interaction: Interaction): Promise<void> {
     if (!interaction.isChatInputCommand()) return;
 
     const command = (interaction.client as Client).commands.get(interaction.commandName);
@@ -14,8 +14,8 @@ export default {
       return;
     }
 
-    await command.callback(interaction).catch(async (e) => {
-      log.error(e.message);
+    await command.callback(interaction).catch(async (error) => {
+      log.error(error.message);
       const errorReply = "There was an error while executing this command.";
       if (interaction.replied || interaction.deferred) {
         await interaction.followUp({ content: errorReply, ephemeral: true });

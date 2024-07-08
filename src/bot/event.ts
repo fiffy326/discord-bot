@@ -12,7 +12,7 @@ export interface Event {
 export async function loadEventFiles(): Promise<Event[]> {
   const events: Event[] = [];
   const dirPath = resolve(import.meta.dirname, "../events");
-  const files = readdirSync(dirPath).filter((f) => f.endsWith(".js"));
+  const files = readdirSync(dirPath).filter((file) => file.endsWith(".js"));
   for (const file of files) {
     const filePath = resolve(dirPath, file);
     const event: Event = (await import(filePath)).default;
